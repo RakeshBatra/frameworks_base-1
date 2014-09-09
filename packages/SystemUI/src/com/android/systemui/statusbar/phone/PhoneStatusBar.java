@@ -116,6 +116,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ThreadedRenderer;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManagerGlobal;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -127,6 +129,7 @@ import android.view.WindowManagerGlobal;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -442,6 +445,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     // settings
     private QSPanel mQSPanel;
+
+    // task manager
+    private TaskManager mTaskManager;
+    private LinearLayout mTaskManagerPanel;
+    private ImageButton mTaskManagerButton;
+    private boolean showTaskList = false;
 
     // top bar
     BaseStatusBarHeader mHeader;
@@ -1548,6 +1557,22 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
                     mHeader.setActivityStarter(PhoneStatusBar.this);
                     mStackScroller.updateNotificationView();
                     mVolumeComponent.updateDialog();
+                }
+            });
+        }
+
+        // task manager
+        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+            mTaskManagerPanel =
+                    (LinearLayout) mStatusBarWindow.findViewById(R.id.task_manager_panel);
+            mTaskManager = new TaskManager(mContext, mTaskManagerPanel);
+            mTaskManager.setActivityStarter(this);
+            mTaskManagerButton = (ImageButton) mHeader.findViewById(R.id.task_manager_button);
+            mTaskManagerButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    showTaskList = !showTaskList;
+                    mNotificationPanel.setTaskManagerVisibility(showTaskList);
                 }
             });
         }
@@ -3475,6 +3500,9 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         mWaitingForKeyguardExit = false;
         recomputeDisableFlags(!force /* animate */);
         setInteracting(StatusBarManager.WINDOW_STATUS_BAR, true);
+        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+            mTaskManager.refreshTaskManagerView();
+        }
     }
 
     public void animateCollapsePanels() {
