@@ -1562,7 +1562,8 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         }
 
         // task manager
-        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.ENABLE_TASK_MANAGER, 0) == 1) {
             mTaskManagerPanel =
                     (LinearLayout) mStatusBarWindow.findViewById(R.id.task_manager_panel);
             mTaskManager = new TaskManager(mContext, mTaskManagerPanel);
@@ -3500,7 +3501,8 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         mWaitingForKeyguardExit = false;
         recomputeDisableFlags(!force /* animate */);
         setInteracting(StatusBarManager.WINDOW_STATUS_BAR, true);
-        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.ENABLE_TASK_MANAGER, 0) == 1) {
             mTaskManager.refreshTaskManagerView();
         }
     }
