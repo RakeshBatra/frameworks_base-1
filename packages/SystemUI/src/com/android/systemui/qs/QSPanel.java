@@ -122,6 +122,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
 
     }
 
+    public void setenabled() {
+      mCustomizePanel.setenabled();
+    }
+
     protected void setupTileLayout() {
         mTileLayout = (QSTileLayout) LayoutInflater.from(mContext).inflate(
                 R.layout.qs_paged_tile_layout, this, false);

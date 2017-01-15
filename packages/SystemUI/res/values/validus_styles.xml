@@ -49,4 +49,10 @@
         <item name="android:textSize">14dp</item>
     </style>
 
+    <style name="TextAppearance.StatusBar.TaskManager" parent="@*android:style/TextAppearance.StatusBar.Icon">
+        <item name="android:textSize">13dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
