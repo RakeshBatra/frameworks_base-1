@@ -234,9 +234,6 @@ public class NotificationPanelView extends PanelView implements
     private boolean mQsSecureExpandDisabled;
     private LockPatternUtils mLockPatternUtils;
 
-    // Task Manager Animation
-    private QSDetailClipper mClipper;
-
     private Runnable mHeadsUpExistenceChangedRunnable = new Runnable() {
         @Override
         public void run() {

@@ -181,12 +181,8 @@ public class QuickStatusBarHeader extends BaseStatusBarHeader implements
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
         ((RippleDrawable) mExpandIndicator.getBackground()).setForceSoftware(true);
-<<<<<<< HEAD
-    
-=======
         ((RippleDrawable) mTaskManagerButton.getBackground()).setForceSoftware(true);
 
->>>>>>> 3369fd122ba... TaskManager: Update UI and adapt For Nougat
         mBackgroundImage = (ImageView) findViewById(R.id.background_image);
     
         updateResources();
@@ -471,6 +467,7 @@ public class QuickStatusBarHeader extends BaseStatusBarHeader implements
     private void startAlarmsActivity() {
         mActivityStarter.startActivity(new Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS),
                 true /* dismissShade */);
+    }
 
     @Override
     public void starttmactivity() {
